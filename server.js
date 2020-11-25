@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
-require('./models/User'); //must instantiate models BEFORE passport
+require('./models/User');
 require('./services/passport');
+//IMPORTANT - see passport.js - must instantiate/require models BEFORE passport
 
 const connectDB = async () => {
     try {
@@ -24,7 +25,8 @@ connectDB();
 
 const app = express();
 
-//Returns a function, immediatly invokes function with app as arg
+//Routes
+//NOTE: Returns a function, immediatly invoke function with app as arg
 require('./routes/authRoutes')(app)
 
 const PORT = process.env.PORT || 5000;
