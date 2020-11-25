@@ -1,5 +1,26 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
 require('./services/passport');
+require('./models/User');
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(keys.mongoURI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false
+        });
+        console.log('MongoDB Connected')
+    } catch (err) {
+        console.error(err.message);
+        //exit process with failure
+        process.exit(1);
+    }
+};
+
+connectDB();
 
 const app = express();
 
