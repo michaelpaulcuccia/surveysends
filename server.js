@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
+require('./models/User'); //must instantiate models BEFORE passport
 require('./services/passport');
-require('./models/User');
 
 const connectDB = async () => {
     try {
