@@ -6,11 +6,27 @@ const keys = require('../config/keys');
 //IMPORTANT - see server.js, must instantiate/require models BEFORE passport
 const User = mongoose.model('users');
 
+//define an arrow function that is passed to passport.serializeUser
+//user.id is NOT googleId, it is MongoDB ._id
+passport.serializeUser((user, done) => {
+    //user.id added to cookie
+    done(null, user.id);
+});
+
+//define an arrow function that is passed to passport.deserializeUser
+//search db with id
+passport.deserializeUser((id, done) => {
+    User.findById(id)
+        .then(user => {
+            done(null, user);
+        });
+});
+
 passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback'
-}, async (accessToken, refreshToken, profile, done) => {
+}, (accessToken, refreshToken, profile, done) => {
 
     //console.log('accessToken: ' + accessToken);
     //console.log('refreshToken: ' + refreshToken);
@@ -18,7 +34,6 @@ passport.use(new GoogleStrategy({
     //console.log(profile.id)
 
     //check for user
-    /*
     User.findOne({ googleId: profile.id }).then(existingUser => {
         if (existingUser) {
             done(null, existingUser);
@@ -27,9 +42,9 @@ passport.use(new GoogleStrategy({
                 .then(user => done(null, user));
         }
     });
-    */
 
     /*
+    //***add async to callback
     const existingUser = await User.findOne({ googleId: profile.id });
 
     if (existingUser) {

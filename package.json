@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/michaelpaulcuccia/surveysends#readme",
   "dependencies": {
+    "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.16",
     "nodemon": "^2.0.6",
