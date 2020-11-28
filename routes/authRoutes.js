@@ -6,20 +6,17 @@ module.exports = (app) => {
     app.get('/auth/google',
         passport.authenticate('google', {
             scope: ['profile', 'email']
-        }),
-        (req, res) => {
-
-        }
+        })
     );
 
     //callback
     app.get('/auth/google/callback',
         passport.authenticate('google')
-
     );
 
     //get access to user
     app.get('/api/current_user', (req, res) => {
+        //console.log(req.session) //contains data passport is attempting to store in cookie (mongodb id), passed to deserialize user
         res.send(req.user)
     });
 
