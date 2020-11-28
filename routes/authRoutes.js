@@ -16,7 +16,8 @@ module.exports = (app) => {
 
     //get access to user
     app.get('/api/current_user', (req, res) => {
-        //console.log(req.session) //contains data passport is attempting to store in cookie (mongodb id), passed to deserialize user
+        //console.log(req.session) 
+        //contains data passport is attempting to store in cookie (mongodb id), passed to deserialize user
         res.send(req.user)
     });
 
@@ -25,7 +26,6 @@ module.exports = (app) => {
         req.logout();
         res.send(req.user);
     });
-
 
 }
 

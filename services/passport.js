@@ -26,7 +26,7 @@ passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback'
-}, (accessToken, refreshToken, profile, done) => {
+}, async (accessToken, refreshToken, profile, done) => {
 
     //console.log('accessToken: ' + accessToken);
     //console.log('refreshToken: ' + refreshToken);
@@ -34,28 +34,28 @@ passport.use(new GoogleStrategy({
     //console.log(profile.id)
 
     //check for user
-    User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-            done(null, existingUser);
+    try {
+
+        let user = await User.findOne({ googleId: profile.id });
+
+        if (user) {
+            done(null, user);
+            console.log('user already exists');
         } else {
-            new User({ googleId: profile.id }).save()
-                .then(user => done(null, user));
+
+            //create a newUser object
+            const newUser = {
+                googleId: profile.id
+            };
+
+            user = await User.create(newUser);
+            done(null, user);
+            console.log('user did not exist');
         }
-    });
 
-    /*
-    //***add async to callback
-    const existingUser = await User.findOne({ googleId: profile.id });
-
-    if (existingUser) {
-        done(null, existingUser);
-        console.log('user already exists')
-    } else if (!existingUser) {
-        const newUser = new User({ googleId: profile.id }).save();
-        done(null, newUser);
-        console.log('user did not exist')
+    } catch (err) {
+        console.error(err);
     }
-    */
 
 })
 );
