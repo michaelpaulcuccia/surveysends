@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers';
+import reduxThunk from 'redux-thunk'
 import App from './App';
+import 'materialize-css/dist/css/materialize.min.css';
 
-//dummy reducer - arrow function that returns an array
-//2nd arg is initial state of app
-const store = createStore(() => [], {}, applyMiddleware());
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
   <React.StrictMode>
