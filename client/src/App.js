@@ -20,7 +20,6 @@ const Landing = () => {
 const App = (props) => {
 
   useEffect(() => {
-    actions.fetchUser();
     props.fetchUser();
   }, [])
 
