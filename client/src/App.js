@@ -17,10 +17,10 @@ const Landing = () => {
   return <h2>Landing</h2>
 }
 
-const App = (props) => {
+const App = ({ fetchUser }) => {
 
   useEffect(() => {
-    props.fetchUser();
+    fetchUser();
   }, [])
 
   return (
