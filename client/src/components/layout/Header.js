@@ -21,7 +21,7 @@ class Header extends Component {
         return (
             <nav>
                 <div className="nav-wrapper">
-                    <a href='/' className="left brand-logo" style={{ marginLeft: '5px' }}>SurverySends</a>
+                    <a href='/' className="left brand-logo" style={{ marginLeft: '5px' }}>Survey Sends</a>
                     <ul id="nav-mobile" className="right">
                         {this.renderContent()}
                     </ul>
