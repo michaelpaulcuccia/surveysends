@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
-
 import Header from './components/layout/Header';
+import Landing from './components/layout/Landing';
 
 const Dashboard = () => {
   return <h2>Dashboard</h2>
@@ -11,10 +11,6 @@ const Dashboard = () => {
 
 const SurveryNew = () => {
   return <h2>SurveryNew</h2>
-}
-
-const Landing = () => {
-  return <h2>Landing</h2>
 }
 
 const App = ({ fetchUser }) => {
