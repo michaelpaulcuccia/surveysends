@@ -6,11 +6,11 @@ class Header extends Component {
     renderContent() {
         switch (this.props.auth) {
             case null:
-                return 'Still deciding...'
+                return <li>Loading...</li>
             case false:
-                return 'Logged Out'
+                return <li><a href='/auth/google'>Login With Google</a></li>;
             default:
-                return 'Logged In'
+                return <li><a href='/api/logout'>Logout</a></li>;
         }
     }
 
@@ -24,9 +24,6 @@ class Header extends Component {
                     <a href='/' className="left brand-logo" style={{ marginLeft: '5px' }}>SurverySends</a>
                     <ul id="nav-mobile" className="right">
                         {this.renderContent()}
-                        {/* <li>
-                            <a href='/'>Login With Google</a>
-                        </li> */}
                     </ul>
                 </div>
             </nav>
@@ -34,6 +31,7 @@ class Header extends Component {
     }
 }
 
+//connects component to redux - this.props.auth
 function mapStateToProps({ auth }) {
     return { auth: auth }
 }
