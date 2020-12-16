@@ -34,4 +34,3 @@ const App = ({ fetchUser }) => {
 }
 
 export default connect(null, actions)(App);
-
