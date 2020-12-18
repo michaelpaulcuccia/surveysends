@@ -40,7 +40,8 @@ app.use(passport.session());
 
 //Routes
 //NOTE: Returns a function, immediatly invoke function with app as arg
-require('./routes/authRoutes')(app)
+require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
 

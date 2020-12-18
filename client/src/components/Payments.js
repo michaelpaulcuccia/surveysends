@@ -5,10 +5,11 @@ import * as actions from '../actions';
 
 const Payments = props => {
 
+    //name = header
+    //description = subheader
     //amount = cents
     //token = callback function, called after successfully retrievinig auth token from stripe api
-    //name = header
-    //description = header
+    //stripeKey = public   
 
     //button child component utilizes material-css instead of built-in styles
 

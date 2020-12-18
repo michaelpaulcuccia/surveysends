@@ -21,6 +21,7 @@ module.exports = (app) => {
     app.get('/api/current_user', (req, res) => {
         //console.log(req.session) 
         //contains data passport is attempting to store in cookie (mongodb id), passed to deserialize user
+        //authReducer - action.payload contains user model, either an object or empty string. empty string is a false value
         res.send(req.user)
     });
 

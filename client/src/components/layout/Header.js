@@ -7,6 +7,7 @@ class Header extends Component {
 
     renderContent() {
         switch (this.props.auth) {
+            //action.payload contains user model, either an object or empty string. empty string is a false value
             case null:
                 return <li>Loading...</li>
             case false:
