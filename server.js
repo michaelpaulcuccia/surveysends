@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 require('./models/User');
 require('./services/passport');
@@ -26,6 +27,8 @@ const connectDB = async () => {
 connectDB();
 
 const app = express();
+
+app.use(bodyParser.json());
 
 //enable express to use cookies
 app.use(
