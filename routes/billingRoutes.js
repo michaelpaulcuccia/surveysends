@@ -8,11 +8,7 @@ module.exports = (app) => {
     app.post('/api/stripe', async (req, res) => {
 
         //console.log(req.body)
-        //user - passport de/serializeUser() has access to MongoDB id
-
         const { id } = req.body;
-
-        console.log('///---///')
 
         const charge = await stripe.charges.create({
             amount: 500,
@@ -22,6 +18,7 @@ module.exports = (app) => {
         });
 
         //get MongoDB Id
+        //req.user - passport de/serializeUser() has access to MongoDB id
         let userId = req.user._id
 
         //find user by MongoDB Id
@@ -33,7 +30,6 @@ module.exports = (app) => {
             const userUpdated = await user.save();
             res.send(userUpdated);
         }
-
 
     });
 
