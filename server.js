@@ -7,6 +7,7 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./services/passport');
 //IMPORTANT - see passport.js - must instantiate/require models BEFORE passport
+const path = require('path');
 
 const connectDB = async () => {
     try {
@@ -23,7 +24,6 @@ const connectDB = async () => {
         process.exit(1);
     }
 };
-
 connectDB();
 
 const app = express();
@@ -45,6 +45,16 @@ app.use(passport.session());
 //NOTE: Returns a function, immediatly invoke function with app as arg
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+
+//production environment
+if (process.env.NODE_ENV === 'production') {
+    //express serves production assets
+    app.use(express.static('client/build'));
+    //express serves index.html if route isn't recognized
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 const PORT = process.env.PORT || 5000;
 
