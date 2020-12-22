@@ -46,6 +46,7 @@ app.use(passport.session());
 //NOTE: Returns a function, immediatly invoke function with app as arg
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 //production environment
 if (process.env.NODE_ENV === 'production') {
